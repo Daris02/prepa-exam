@@ -21,6 +21,7 @@ export class FoodFactory {
         (segment) =>
           segment.x === foodPosition.x && segment.y === foodPosition.y
       )
+      // TODO: Add condition to generate food, more centering and not at edge
     );
     return foodPosition!;
   }

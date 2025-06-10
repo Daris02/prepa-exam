@@ -28,7 +28,7 @@ export class Game {
     this._snake = new SnakeBuilder(
       new Point(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10)),
       3,
-      Direction.DOWN
+      Direction.DOWN // TODO: change to random value
     ).build();
     this._food = this.generateFood();
     this._gameState = new GameState(this);
@@ -64,10 +64,8 @@ export class Game {
       Array.from({ length: this.gridSize }, () => ".")
     );
 
-    // Place la nourriture
     grid[this._food.y][this._food.x] = "@";
 
-    // Place le corps du serpent
     for (const [i, segment] of this._snake.getBody.entries()) {
       if (
         segment.y >= 0 &&
@@ -78,8 +76,7 @@ export class Game {
         grid[segment.y][segment.x] = i === 0 ? "*" : "#";
       }
     }
-
-    // Efface la console et affiche la grille
+    
     console.clear();
     for (const row of grid) {
       console.log(row.join(" "));
