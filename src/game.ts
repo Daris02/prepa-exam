@@ -1,4 +1,5 @@
 import { Direction } from "./direction";
+import { FoodFactory } from "./foodFactory";
 import { GameState } from "./gameState";
 import { Point } from "./point";
 import { Snake } from "./snake";
@@ -34,14 +35,8 @@ export class Game {
   }
 
   private generateFood(): Point {
-    let foodPosition: Point;
-    do {
-      foodPosition = new Point(
-        Math.floor(Math.random() * this.gridSize),
-        Math.floor(Math.random() * this.gridSize)
-      );
-    } while (this._snake.collidesWith(foodPosition));
-    return foodPosition;
+    const foodFactory = new FoodFactory(this.gridSize);
+    return foodFactory.generateFood(this._snake);
   }
 
   public startGame(): void {
