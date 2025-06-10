@@ -2,30 +2,30 @@ import { Direction } from "./direction";
 import { Point } from "./point";
 
 export class Snake {
-  private corps: Point[];
+  private body: Point[];
   private direction: Direction;
 
   constructor(initialPosition: Point, initialLength: number, initialDirection: Direction) {
-    this.corps = Array(initialLength).fill(initialPosition);
+    this.body = Array(initialLength).fill(initialPosition);
     this.direction = initialDirection;
   }
 
-  get getBody() {
-    return this.corps;
+  get getBody(): Point[] {
+    return this.body;
   }
 
   croissance() {
     const newHead = this.computeNextPosition();
-    this.corps.unshift(newHead);
+    this.body.unshift(newHead);
   }
 
   avancer() {
-    this.corps.pop();
+    this.body.pop();
     this.croissance();
   }
 
   private computeNextPosition(): Point {
-    const head = this.corps[0];
+    const head = this.body[0];
     let newX = head.x;
     let newY = head.y;
 
@@ -48,10 +48,10 @@ export class Snake {
   }
 
   colisions(): boolean {
-    const head = this.corps[0];
+    const head = this.body[0];
     return (
       head.x < 0 || head.x >= 10 || head.y < 0 || head.y >= 10 || 
-      this.corps.slice(1).some(segment => segment.x === head.x && segment.y === head.y)
+      this.body.slice(1).some(segment => segment.x === head.x && segment.y === head.y)
     );
   }
 
@@ -70,7 +70,7 @@ export class Snake {
   }
 
   collidesWith(foodPosition: Point): boolean {
-    return this.corps[0].x === foodPosition.x && this.corps[0].y === foodPosition.y;
+    return this.body[0].x === foodPosition.x && this.body[0].y === foodPosition.y;
   }
 
   move() {
@@ -86,21 +86,17 @@ export class Snake {
   }
 
   checkCollision(gridSize: number): boolean {
-    const head = this.corps[0];
+    const head = this.body[0];
     if (
       head.x < 0 || head.x >= gridSize ||
       head.y < 0 || head.y >= gridSize
     ) {
       return true;
     }
-    return this.corps.slice(1).some(segment => segment.x === head.x && segment.y === head.y);
+    return this.body.slice(1).some(segment => segment.x === head.x && segment.y === head.y);
   }
 
   changeDirection(direction: Direction) {
     this.changerDirection(direction);
-  }
-
-  get corpsSnake(): Point[] {
-    return this.corps;
   }
 }
