@@ -1,0 +1,18 @@
+{
+  "name": "hei-snake-game",
+  "version": "1.0.0",
+  "description": "A console-based Snake game implemented in TypeScript.",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "ts-node": "^10.0.0",
+    "typescript": "^4.0.0"
+  },
+  "devDependencies": {},
+  "author": "Your Name",
+  "license": "MIT"
+}
